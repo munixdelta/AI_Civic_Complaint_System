@@ -4,6 +4,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.health import router as health_router
+from app.api.v1.detection import router as detection_router
+from app.api.v1.authority import router as authority_router
+from app.api.v1.complaint import router as complaint_router
+from app.api.v1.location import router as location_router
 from app.api.v1.model import router as model_router
 from app.core.config import settings
 from app.services.computer_vision import cv_model_service
@@ -45,7 +49,7 @@ app = FastAPI(
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, specify frontend domain
+    allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -58,6 +62,10 @@ app.include_router(health_router, prefix="/api", tags=["health"])
 # Model management: GET /api/v1/model/status and GET /api/model/status
 app.include_router(model_router, prefix=f"{settings.API_V1_STR}/model", tags=["model"])
 app.include_router(model_router, prefix="/api/model", tags=["model"])
+app.include_router(detection_router, prefix=f"{settings.API_V1_STR}/detection", tags=["detection"])
+app.include_router(location_router, prefix=f"{settings.API_V1_STR}/location", tags=["location"])
+app.include_router(authority_router, prefix=f"{settings.API_V1_STR}/authority", tags=["authority"])
+app.include_router(complaint_router, prefix=f"{settings.API_V1_STR}/complaint", tags=["complaint"])
 
 
 @app.get("/")

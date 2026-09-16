@@ -23,6 +23,11 @@ class Settings(BaseSettings):
     YOLO_MODEL_PATH: str = "ai/computer_vision/training/runs/yolov8n_m1_13/weights/best.pt"
     YOLO_MODEL_VERSION: str = "M1.13-yolov8n"
     YOLO_DEVICE: str = "cpu"
+    YOLO_CONFIDENCE_THRESHOLD: float = 0.25
+    MAX_IMAGE_UPLOAD_BYTES: int = 10 * 1024 * 1024
+    REVERSE_GEOCODER_URL: str = "https://nominatim.openstreetmap.org/reverse"
+    REVERSE_GEOCODER_USER_AGENT: str = "CVKI/0.2 location foundation"
+    REVERSE_GEOCODER_TIMEOUT_SECONDS: float = 5.0
     
     # Expected Class Mapping for CIVKI Model
     EXPECTED_CLASSES: dict[int, str] = {

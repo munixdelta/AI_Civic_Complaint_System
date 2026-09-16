@@ -2,6 +2,8 @@ fastapi
 uvicorn
 pydantic
 pydantic-settings
+python-multipart
+Pillow
 motor
 python-dotenv
 ultralytics
